@@ -3,18 +3,18 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({
+    include: "**/*.{jsx,tsx}",
+  })],
+  root: '.',
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     sourcemap: true,
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'public/index.html'),
-      },
-    },
   },
   server: {
-    port: 5173,
+    port: 3001,
+    host: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
